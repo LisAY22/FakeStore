@@ -7,5 +7,6 @@ learn different web technologies.
 ## Built with
 - React
 - HTML
+- Bootstrap
 - CSS
 - JavaScript 
