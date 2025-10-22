@@ -1,0 +1,13 @@
+.color {
+    color: rgb(77, 53, 99);
+    border-color: rgb(77, 53, 99);
+}
+
+.color:hover {
+    background-color: rgb(77, 53, 99);
+    color: white;
+}
+
+.footer {
+    text-align: center;
+}

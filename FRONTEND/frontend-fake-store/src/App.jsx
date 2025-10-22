@@ -4,9 +4,23 @@ import ProductCard  from "./components/ProductCard";
 
 function App() {
   return (
-    <div className="Container">
+    <div className="container-fluid">
       <Header />
-      <ProductCard />
+      <br></br>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <ProductCard />
+          </div>
+          <div className="col">
+            <ProductCard />
+          </div>
+          <div className="col">
+            <ProductCard />
+          </div>
+        </div>
+      </div>
+      <br></br>
       <Footer />
     </div>
   );
