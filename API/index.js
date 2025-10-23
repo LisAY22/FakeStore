@@ -28,10 +28,21 @@ db.run('CREATE TABLE IF NOT EXISTS products(id INTEGER PRIMARY KEY AUTOINCREMENT
 
 // Define endpoints
 app.get('/products', (req, res) => {
-    const sql = "SELECT * FROM products";
+    const { search } = req.query;
+
+    let sql = "SELECT * FROM products";
+    let params = [];
+
+    if (search) {
+        // The "LIKE" keyword is for partial matches
+        // The "%" is a wildcard, meaning "match anything"
+        // So '%harry%' means "find any text that has 'harry' in it"
+        sql = "SELECT * FROM products WHERE name LIKE ?";
+        params = [`%${search}%`]; 
+    }
 
     // db.all() runs the query and gives all results in the 'rows' variable
-    db.all(sql, [], (err, rows) => {
+    db.all(sql, params, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;

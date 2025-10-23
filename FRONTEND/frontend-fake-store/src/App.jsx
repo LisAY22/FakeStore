@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import Header  from "./components/Header";
 import Footer  from "./components/Footer";
@@ -9,11 +9,18 @@ function App() {
   // Create an state to hold the product list
   const [products, setProducts] = useState([]);
 
+  // Create a state to hold the search term
+  const [searchTerm, setSearchTerm] = useState('');
+
   // The efect hook to fetch data from the backend
   useEffect(() => {
+
+    const url = searchTerm
+      ? `http://localhost:3000/products?search=${searchTerm}`
+      : 'http://localhost:3000/products';
     
     // Call to the backend API to get products
-    fetch('http://localhost:3000/products') 
+    fetch(url) 
       .then(response => response.json()) 
       .then(data => {
         // Save the products in the state
@@ -22,11 +29,12 @@ function App() {
       .catch(error => {
         console.error("Error:", error);
       });
-  }, []); // The empty array ensures this runs once on component mount
+  }, [searchTerm]); // Re-run the effect when searchTerm changes 
 
   return (
     <div>
-      <Header />
+      <Header searchTerm={searchTerm} 
+        onSearchChange={setSearchTerm} />
       <br></br>
 
       <div className="container my-4">
