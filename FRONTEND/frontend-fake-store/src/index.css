@@ -1,11 +1,27 @@
-.color {
-    color: rgb(77, 53, 99);
-    border-color: rgb(77, 53, 99);
+.navbar{
+    background-color: rgb(196, 173, 131);
 }
 
-.color:hover {
-    background-color: rgb(77, 53, 99);
+.btncolor {
+    border-color: rgb(47, 27, 37);
+    color:rgb(47, 27, 37)
+}
+
+.btncolor:hover,
+.btncolor:focus,
+.btncolor:active {
+    background-color: rgb(47, 27, 37);
     color: white;
+}
+
+.cartbtn {
+    border-color: rgb(47, 27, 37);
+}
+
+.cartbtn:hover,
+.cartbtn:focus,
+.cartbtn:active {
+    background-color: rgba(255, 255, 255, 0.623);
 }
 
 .footer {

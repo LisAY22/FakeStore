@@ -1,5 +1,6 @@
 // Import Express and SQLite
 const express = require('express');
+const cors = require('cors');   // To handle Cross-Origin Resource Sharing
 const sqlite3 = require('sqlite3').verbose(); // '.verbose()' gives more helpful error messages
 
 // Create an Express application
@@ -10,6 +11,9 @@ const port = 3000;
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Connect to (or create) your database file
 const db = new sqlite3.Database('./fake-store.db', (err) => {
@@ -37,7 +41,7 @@ app.get('/products', (req, res) => {
     });
 });
 
-app.post('/products', (req, res) => {
+app.post('/products/create', (req, res) => {
     // Get the picture, name, description and price from the request body
     const { picture, name, description, price } = req.body;
     const sql = "INSERT INTO products (picture, name, description, price) VALUES (?, ?, ?, ?)";

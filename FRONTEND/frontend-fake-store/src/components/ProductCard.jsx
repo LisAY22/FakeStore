@@ -1,14 +1,16 @@
-import tienda2 from '../assets/tienda2.png';
-
-function ProductCard(){
+function ProductCard({picture, name, description, price}) {
     return(
-        <div class="card">
-            <img src={tienda2} class="card-img-top" alt="Tienda" />
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                <a href="#" class="btn btn-primary">ADD TO CART</a>
+        <div className="card h-100">
+
+            <img src={picture} className="card-img-top" alt={name} />
+
+            <div className="card-body">
+                <h5 className="card-title">{name}</h5>
+                <p className="card-text">{description}</p>
+                <p className="card-text">Q{price}</p>
+                <a href="#" className="btn btncolor">ADD TO CART</a>
             </div>
+        
         </div>
     )
 }
