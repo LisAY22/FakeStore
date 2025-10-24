@@ -25,6 +25,7 @@ const db = new sqlite3.Database('./fake-store.db', (err) => {
 
 // Create the "products" table (if the table doesn't exist)
 db.run('CREATE TABLE IF NOT EXISTS products(id INTEGER PRIMARY KEY AUTOINCREMENT, picture TEXT, name TEXT, description TEXT,price REAL)');
+db.run('CREATE TABLE IF NOT EXISTS cart(id INTEGER PRIMARY KEY AUTOINCREMENT, product_id INTEGER, quantity INTEGER, FOREIGN KEY(product_id) REFERENCES products(id))');
 
 // Define endpoints
 app.get('/products', (req, res) => {
@@ -71,6 +72,51 @@ app.post('/products/create', (req, res) => {
         description: description,
         price: price
         });
+    });
+});
+
+app.post('/cart/add', (req, res) => {
+    const { product_id, quantity } = req.body;
+    const sql = "INSERT INTO cart (product_id, quantity) VALUES (?, ?)";
+
+    db.run(sql, [product_id, quantity], function(err) {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+        res.status(201).json({
+            id: this.lastID,
+            product_id: product_id,
+            quantity: quantity
+        });
+    });
+});
+
+app.get('/cart', (req, res) => {
+    const sql = `SELECT cart.id as cart_id, products.id as product_id, products.picture, products.name, products.description, products.price, cart.quantity 
+                 FROM cart 
+                 JOIN products ON cart.product_id = products.id`;
+    
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.status(200).json(rows);
+    });
+});
+
+app.put('/cart/update/:id', (req, res) => {
+    const { id } = req.params;
+    const { quantity } = req.body;
+    const sql = "UPDATE cart SET quantity = ? WHERE id = ?";
+
+    db.run(sql, [quantity, id], function(err) {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }  
+        res.status(200).json({ message: 'Cart updated successfully' });
     });
 });
 

@@ -1,9 +1,10 @@
 import '../index.css';
 import tienda3 from '../assets/tienda3.png';
 import compras from '../assets/compras.png';
+import { Link } from 'react-router-dom';
 
-function Header({ searchTerm, onSearchChange }) {
-  // 2. This function stops the page refresh
+function Header({ searchTerm, onSearchChange}) {
+  // This function stops the page refresh
   const handleSubmit = (event) => {
     event.preventDefault(); 
     // We don't need to do anything else, 
@@ -17,7 +18,7 @@ function Header({ searchTerm, onSearchChange }) {
 
           <div className="container-fluid">
 
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand">
               <img src={tienda3} alt="Logo" width="50px" className="me-3" />
               FAKE STORE
             </a>
@@ -27,11 +28,10 @@ function Header({ searchTerm, onSearchChange }) {
                 onChange={e => onSearchChange(e.target.value)}/>
             </form> 
 
-          <form className="d-flex">
-            <button className="btn cartbtn" type="submit">
+
+          <Link to="/cart" className="btn cartbtn">
               <img src={compras} alt="Cart" width="40px" />
-            </button>
-          </form>
+          </Link>
 
           </div>
 

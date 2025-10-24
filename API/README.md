@@ -31,3 +31,27 @@
     "price": 300
 }
 ```
+```
+{
+    "picture": "/Images/HarryPotter5.jpg",
+    "name": "Harry Potter and the Order of the Phoenix",
+    "description": "During his fifth year, the Ministry of Magic refuses to believe that Lord Voldemort has returned. A cruel, power-hungry new teacher, Dolores Umbridge, takes control of the school, forcing Harry to secretly form 'Dumbledore's Army' to teach his classmates practical defense.",
+    "price": 300
+}
+```
+```
+{
+    "picture": "/Images/HarryPotter6.jpg",
+    "name": "Harry Potter and the Half-Blood Prince",
+    "description": "In his sixth year, Dumbledore begins giving Harry private lessons, exploring the dark past of Lord Voldemort to find the secret to his immortality—Horcruxes. Meanwhile, Harry finds an old potions textbook owned by the mysterious 'Half-Blood Prince' that gives him an unusual advantage in class.",
+    "price": 350
+}
+```
+```
+{
+    "picture": "/Images/HarryPotter7.jpg",
+    "name": "Harry Potter and the Deathly Hallows",
+    "description": "In the final book, Harry, Ron, and Hermione skip their last year at Hogwarts to go on a dangerous mission to find and destroy the remaining Horcruxes. Their quest leads them to discover the legend of the Deathly Hallows and culminates in a final, epic battle at Hogwarts to defeat Voldemort.",
+    "price": 450
+}
+```
