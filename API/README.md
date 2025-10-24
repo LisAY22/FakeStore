@@ -1,4 +1,46 @@
-## Samples JSON to create a product
+# Fake Store API 
+This is a simple REST API that serves as the backend for the "Fake Store" e-commerce project.
+The REST API is responsible of managing the products, applying search filters, and handling the shopping cart logic.
+
+## Technologies
+This project was built with:
+- Node.js (v24.6.0): JavaScript runtime environment
+- Express.js: Web framework for Node.js
+- SQLite3: Database driver for SQLite
+- CORS: Middleware for handling Cross-Origin Resource Sharing
+
+## How to Get Started
+### Prerequisites
+- Node.js 
+- Postman (Optional, for testing API endpoints)
+
+### Installation & Setup
+1. Clone the repository 
+[https://github.com/LisAY22/FakeStore.git](https://github.com/LisAY22/FakeStore.git)
+2. Navigate to the API project directory 
+```cd FAKESTORE/API```
+3. Install all the required dependencies
+```npm install```
+
+### Run the server
+```node index.js```
+By default the server will run at:
+```http://localhost:3000```
+
+Note: The first time you run the server, it will automatically create a ```fake-store.db``` file. 
+This file is included in the ```.gitignore``` and will not be committed to the repository.
+
+## API Endpoints
+| Method | Endpoint | Description |
+| GET | ```/products``` | List all products |
+| GET | ```/products?search=:term``` | Searches products names matching the :tems |
+| POST | ```/products/create``` | Creates a new product |
+| POST | ```/cart/add``` | Adds a product to the cart |
+| GET | ```/cart``` | List the products in the cart |
+| PUT | ```/cart/update/:id``` | Updated the quantity of a product in the cart |
+| DELETE | ```/cart/remove/:id``` | Deletes a product in the cart |
+
+### Samples JSON to create a product
 ```
 {
     "picture": "/Images/HarryPotter1.jpg",

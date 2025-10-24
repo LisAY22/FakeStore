@@ -36,7 +36,7 @@ function App() {
   }, [searchTerm]); // Re-run the effect when searchTerm changes 
 
   return (
-    <div>
+    <div className="container-fluid d-flex flex-column min-vh-100 p-0">
       <Routes>
 
         <Route path="/" element={
@@ -66,15 +66,14 @@ function App() {
       } />
 
       <Route path="/cart" element={
-        <>
+        <div className="flex-grow-1">
           <HeaderCart />
           <Cart />
-        </>
+        </div>
       } />
 
       </Routes>
 
-      <br></br>
       <Footer />
     </div>
   );
