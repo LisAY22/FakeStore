@@ -77,18 +77,35 @@ app.post('/products/create', (req, res) => {
 
 app.post('/cart/add', (req, res) => {
     const { product_id, quantity } = req.body;
-    const sql = "INSERT INTO cart (product_id, quantity) VALUES (?, ?)";
-
-    db.run(sql, [product_id, quantity], function(err) {
+    const checkSql = "SELECT * FROM cart WHERE product_id = ?";
+    db.get(checkSql, [product_id], (err, row) => {
         if (err) {
-            res.status(400).json({ error: err.message });
-            return;
+            return res.status(500).json({ error: err.message });
         }
-        res.status(201).json({
-            id: this.lastID,
-            product_id: product_id,
-            quantity: quantity
-        });
+
+        if (row) {
+            // IF IT EXISTS: Update the existing row
+            const newQuantity = row.quantity + 1; 
+            const updateSql = "UPDATE cart SET quantity = ? WHERE product_id = ?";
+            
+            db.run(updateSql, [newQuantity, product_id], function(err) {
+                if (err) {
+                    return res.status(400).json({ error: err.message });
+                }
+                res.status(200).json({ message: 'Cart updated', quantity: newQuantity });
+            });
+
+        } else {
+            // IF IT DOES NOT EXIST: Insert a new row
+            const insertSql = "INSERT INTO cart (product_id, quantity) VALUES (?, ?)";
+            
+            db.run(insertSql, [product_id, quantity], function(err) {
+                if (err) {
+                    return res.status(400).json({ error: err.message });
+                }
+                res.status(201).json({ id: this.lastID, product_id: product_id, quantity: quantity });
+            });
+        }
     });
 });
 
@@ -117,6 +134,19 @@ app.put('/cart/update/:id', (req, res) => {
             return;
         }  
         res.status(200).json({ message: 'Cart updated successfully' });
+    });
+});
+
+app.delete('/cart/remove/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = "DELETE FROM cart WHERE id = ?";
+
+    db.run(sql, [id], function(err) {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+        res.status(200).json({ message: 'Item removed from cart' });;
     });
 });
 

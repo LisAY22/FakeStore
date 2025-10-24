@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import Header  from "./components/Header";
 import Footer  from "./components/Footer";
 import ProductCard  from "./components/ProductCard";
 import HeaderCart from './components/HeaderCart';
+import Cart from './components/Cart';
 
 function App() {
 
@@ -14,9 +15,6 @@ function App() {
 
   // Create a state to hold the search term
   const [searchTerm, setSearchTerm] = useState('');
-
-  // Create a state to hold the cart items
-  const [cartItems, setCartItems] = useState([]);
 
   // The efect hook to fetch data from the backend
   useEffect(() => {
@@ -36,18 +34,6 @@ function App() {
         console.error("Error:", error);
       });
   }, [searchTerm]); // Re-run the effect when searchTerm changes 
-
-  // Fetch cart items when the cart page is loaded
-  useEffect(() => {
-    fetch('http://localhost:3000/cart')
-      .then(response => response.json())
-      .then(data => {
-        setCartItems(data);
-      })
-      .catch(error => {
-        console.error("Error fetching cart items:", error);
-      });
-  }, []); // Empty dependency array means this runs once on mount
 
   return (
     <div>
@@ -82,29 +68,7 @@ function App() {
       <Route path="/cart" element={
         <>
           <HeaderCart />
-          <div className="container">
-            <h2 className="h2-cart">Your Cart</h2>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Total</th>
-                    </tr>
-                    {
-                      cartItems.map(item => (
-                        <tr key={item.cart_id}>
-                          <td>{item.name}</td>
-                          <td>Q{item.price}</td>
-                          <td>{item.quantity}</td>
-                          <td>Q{item.price * item.quantity}</td>
-                        </tr>
-                      ))
-                    }
-                </thead>
-            </table>
-          </div>
+          <Cart />
         </>
       } />
 
