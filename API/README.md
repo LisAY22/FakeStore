@@ -24,6 +24,7 @@ This project was built with:
 
 ### Run the server
 ```node index.js```
+
 By default the server will run at:
 ```http://localhost:3000```
 
@@ -31,7 +32,9 @@ Note: The first time you run the server, it will automatically create a ```fake-
 This file is included in the ```.gitignore``` and will not be committed to the repository.
 
 ## API Endpoints
+
 | Method | Endpoint | Description |
+---------|---------|--------------|
 | GET | ```/products``` | List all products |
 | GET | ```/products?search=:term``` | Searches products names matching the :tems |
 | POST | ```/products/create``` | Creates a new product |

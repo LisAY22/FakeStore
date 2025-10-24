@@ -30,4 +30,5 @@ This project was built with:
 
 ### Run the server
 ```npm run dev```
+
 Vite will start the development server. Check your terminal for the local URL and open it in your browser.
